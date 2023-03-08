@@ -9,7 +9,7 @@ import android.widget.Button;
 
 import com.example.helmet.databinding.ActivityMainBinding;
 
-//메인
+
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
 
