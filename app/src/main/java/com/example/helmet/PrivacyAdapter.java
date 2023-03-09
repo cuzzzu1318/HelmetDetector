@@ -8,12 +8,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.ArrayList;
+
+import java.util.List;
 
 public class PrivacyAdapter extends RecyclerView.Adapter<PrivacyAdapter.ViewHolder> {
-    private ArrayList<Privacy> Data;
+    private List<Privacy> Data;
 
-    public PrivacyAdapter(ArrayList<Privacy> data){
+    public PrivacyAdapter(List<Privacy> data){
         Data = data;
     }
     @NonNull
@@ -33,7 +34,7 @@ public class PrivacyAdapter extends RecyclerView.Adapter<PrivacyAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return 0;
+        return Data.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -44,7 +45,6 @@ public class PrivacyAdapter extends RecyclerView.Adapter<PrivacyAdapter.ViewHold
             privacy_name = itemView.findViewById(R.id.privacy_name);
             privacy_rrn = itemView.findViewById(R.id.privacy_rrn);
             privacy_phone = itemView.findViewById(R.id.privacy_phone);
-
         }
     }
 }

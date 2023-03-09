@@ -1,6 +1,7 @@
 package com.example.helmet;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
@@ -21,7 +22,7 @@ import java.util.List;
 public class ListActivity extends AppCompatActivity {
 
     private ActivityListBinding binding;
-    List<Privacy> privacyData = new ArrayList<>();
+    List<Privacy> privacyData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,29 +37,19 @@ public class ListActivity extends AppCompatActivity {
         privacyData = db.privacyDao().getAll();
 
         RecyclerView privacy_list = binding.privacyList;
-        privacy_list.setLayoutManager(new LinearLayoutManager(this));
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, 1);
+        privacy_list.addItemDecoration(dividerItemDecoration);
+        privacy_list.setLayoutManager(linearLayoutManager);
 
-        PrivacyAdapter privacyAdapter = new PrivacyAdapter(getSampleList());
+        PrivacyAdapter privacyAdapter = new PrivacyAdapter(privacyData);
+
+        privacyAdapter.notifyDataSetChanged();
         privacy_list.setAdapter(privacyAdapter);
 
-        binding.addListButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), AddActivity.class);
-                startActivity(intent);
-            }
+        binding.addListButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), AddActivity.class);
+            startActivity(intent);
         });
-    }
-
-    private ArrayList<Privacy> getSampleList(){
-        ArrayList<Privacy> lstPrivacyData = new ArrayList<>();
-        for (int i = 0; i< 10; i++){
-            Privacy Data = new Privacy();
-            Data.setName("예제이름");
-            Data.setRrn("예제주민번호");
-            Data.setPhone("예제전화번호");
-            lstPrivacyData.add(Data);
-        }
-        return lstPrivacyData;
     }
 }

@@ -3,6 +3,8 @@ package com.example.helmet;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import java.util.ArrayList;
+
 @Entity
 public class Privacy {
     @PrimaryKey(autoGenerate = true)
@@ -16,10 +18,6 @@ public class Privacy {
         this.name = name;
         this.phone = phone;
         this.rrn = rrn;
-    }
-
-    public Privacy() {
-
     }
 
     public int getId() {
