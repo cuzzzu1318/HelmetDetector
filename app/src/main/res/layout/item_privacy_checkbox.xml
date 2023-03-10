@@ -41,5 +41,12 @@
         app:layout_constraintVertical_bias="0.592"
         tools:text="phone" />
 
+    <CheckBox
+        android:id="@+id/checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toStartOf="@+id/privacy_name"
+        app:layout_constraintTop_toTopOf="@+id/privacy_name" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

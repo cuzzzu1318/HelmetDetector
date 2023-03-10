@@ -14,6 +14,7 @@ public class Privacy {
     private String rrn;
 
 
+
     public Privacy(String name, String phone, String rrn) {
         this.name = name;
         this.phone = phone;
