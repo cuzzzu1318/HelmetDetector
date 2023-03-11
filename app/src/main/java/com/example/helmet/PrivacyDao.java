@@ -22,6 +22,6 @@ public interface PrivacyDao {
     void update(Privacy privacy);
 
     @Delete
-    void Delete(Privacy privacy);
+    void delete(List<Privacy> privacy);
 
 }

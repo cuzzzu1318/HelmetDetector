@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.helmet.databinding.ActivityEditBinding;
@@ -18,6 +19,7 @@ public class EditActivity extends AppCompatActivity {
     private ActivityEditBinding binding;
 
     List<Privacy> privacyData;
+    List<Privacy> checkedData;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,9 +38,15 @@ public class EditActivity extends AppCompatActivity {
         privacy_list.addItemDecoration(dividerItemDecoration);
         privacy_list.setLayoutManager(linearLayoutManager);
 
-        PrivacyAdapter privacyAdapter = new PrivacyAdapter(privacyData);
+        PrivacyAdapter privacyAdapter = new PrivacyAdapter(privacyData, true);
 
         privacyAdapter.notifyDataSetChanged();
         privacy_list.setAdapter(privacyAdapter);
+
+        binding.deleteButton.setOnClickListener(v -> {
+            List<Privacy> checkedData = PrivacyAdapter.getCheckedData();
+            db.privacyDao().delete(checkedData);
+        });
+
     }
 }

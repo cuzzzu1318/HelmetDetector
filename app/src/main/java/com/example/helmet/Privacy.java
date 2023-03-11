@@ -12,13 +12,13 @@ public class Privacy {
     private String name;
     private String phone;
     private String rrn;
-
-
+    private boolean isChecked = false;
 
     public Privacy(String name, String phone, String rrn) {
         this.name = name;
         this.phone = phone;
         this.rrn = rrn;
+        this.isChecked = false;
     }
 
     public int getId() {
@@ -62,5 +62,13 @@ public class Privacy {
                 ", rrn='" + rrn + '\'' +
                 '}'+
                 "\n";
+    }
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
     }
 }

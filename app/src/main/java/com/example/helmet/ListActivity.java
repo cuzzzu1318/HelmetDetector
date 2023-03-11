@@ -42,7 +42,7 @@ public class ListActivity extends AppCompatActivity {
         privacy_list.addItemDecoration(dividerItemDecoration);
         privacy_list.setLayoutManager(linearLayoutManager);
 
-        PrivacyAdapter privacyAdapter = new PrivacyAdapter(privacyData);
+        PrivacyAdapter privacyAdapter = new PrivacyAdapter(privacyData, false);
 
         privacyAdapter.notifyDataSetChanged();
         privacy_list.setAdapter(privacyAdapter);

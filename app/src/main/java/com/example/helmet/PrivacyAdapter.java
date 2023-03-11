@@ -10,10 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class PrivacyAdapter extends RecyclerView.Adapter<PrivacyAdapter.ViewHolder> {
-    private List<Privacy> Data;
+public class PrivacyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+    private static List<Privacy> Data;
     private boolean isChecked;
 
     public PrivacyAdapter(List<Privacy> data, boolean isChecked){
@@ -22,22 +23,26 @@ public class PrivacyAdapter extends RecyclerView.Adapter<PrivacyAdapter.ViewHold
     }
     @NonNull
     @Override
-    public PrivacyAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType){
         if(isChecked){
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_privacy_checkbox, parent, false);
-            ViewHolderNoCheckBox viewHolder = new ViewHolderNoCheckBox(view);
+            ViewHolderCheckBox viewHolder = new ViewHolderCheckBox(view);
             return viewHolder;
         }
         else {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_privacy, parent, false);
-            ViewHolderCheckBox viewHolder = new ViewHolderCheckBox(view);
+            ViewHolderNoCheckBox viewHolder = new ViewHolderNoCheckBox(view);
             return viewHolder;
         }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final PrivacyAdapter.ViewHolder holder, int position){
+    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, int position){
         if(isChecked){
+            ViewHolderCheckBox viewholder = (ViewHolderCheckBox) holder;
+            viewholder.privacy_name.setText(Data.get(position).getName());
+            viewholder.privacy_rrn.setText(Data.get(position).getRrn());
+            viewholder.privacy_phone.setText(Data.get(position).getPhone());
 
         }
         else {
@@ -55,7 +60,6 @@ public class PrivacyAdapter extends RecyclerView.Adapter<PrivacyAdapter.ViewHold
 
     public static class ViewHolderNoCheckBox extends RecyclerView.ViewHolder{
         private TextView privacy_name, privacy_rrn, privacy_phone;
-        private CheckBox is_checked;
 
         public ViewHolderNoCheckBox(@NonNull View itemView){
             super(itemView);
@@ -78,5 +82,16 @@ public class PrivacyAdapter extends RecyclerView.Adapter<PrivacyAdapter.ViewHold
             privacy_phone = itemView.findViewById(R.id.privacy_phone);
             is_checked = itemView.findViewById((R.id.checkbox));
         }
+    }
+
+    public static List<Privacy> getCheckedData(){
+        List<Privacy> checkedData = new ArrayList<>();
+        for(Privacy data : Data){
+            if(data.isChecked()){
+                checkedData.add(data);
+            }
+        }
+        System.out.println(checkedData);
+        return checkedData;
     }
 }
