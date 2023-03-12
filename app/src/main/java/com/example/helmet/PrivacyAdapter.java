@@ -93,7 +93,6 @@ public class PrivacyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 checkedData.add(data);
             }
         }
-        System.out.println(checkedData);
         return checkedData;
     }
 }
