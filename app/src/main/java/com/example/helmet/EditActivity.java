@@ -1,11 +1,13 @@
 package com.example.helmet;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.room.Room;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -44,9 +46,26 @@ public class EditActivity extends AppCompatActivity {
         privacy_list.setAdapter(privacyAdapter);
 
         binding.deleteButton.setOnClickListener(v -> {
-            List<Privacy> checkedData = PrivacyAdapter.getCheckedData();
-            db.privacyDao().delete(checkedData);
-        });
+            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+            builder.setMessage("삭제하시겠습니까?");
 
+            builder.setPositiveButton("확인", (dialog, which) -> {
+                List<Privacy> checkedData = PrivacyAdapter.getCheckedData();
+                db.privacyDao().delete(checkedData);
+                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+                startActivity(intent);
+            });
+
+            builder.setNegativeButton("취소", (dialog, which) -> {
+                // 취소 버튼을 클릭했을 때 처리할 내용
+            });
+
+            AlertDialog alertDialog = builder.create();
+            alertDialog.show();
+        });
+        binding.editEditButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), EditActivity.class);
+            startActivity(intent);
+        });
     }
 }

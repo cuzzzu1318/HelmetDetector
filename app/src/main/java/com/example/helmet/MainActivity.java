@@ -19,12 +19,9 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        binding.privacyButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), ListActivity.class);
-                startActivity(intent);
-            }
+        binding.privacyButton.setOnClickListener(v -> {
+            Intent intent = new Intent(getApplicationContext(), ListActivity.class);
+            startActivity(intent);
         });
     }
 }

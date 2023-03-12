@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -43,7 +44,8 @@ public class PrivacyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             viewholder.privacy_name.setText(Data.get(position).getName());
             viewholder.privacy_rrn.setText(Data.get(position).getRrn());
             viewholder.privacy_phone.setText(Data.get(position).getPhone());
-
+            viewholder.is_checked.setChecked(Data.get(position).isChecked());
+            viewholder.is_checked.setOnCheckedChangeListener((buttonView, isChecked) -> Data.get(position).setChecked(isChecked));
         }
         else {
             ViewHolderNoCheckBox viewholder = (ViewHolderNoCheckBox) holder;
